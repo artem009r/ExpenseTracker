@@ -1,41 +1,36 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
+# Игнорировать исполняемые файлы
 *.exe
 *.out
 *.app
 
-# debug information files
-*.dwo
+# Игнорировать объектные файлы и промежуточные файлы компиляции
+*.o
+*.obj
+*.a
+*.lib
+*.so
+
+# Игнорировать папки сборки
+build/
+bin/
+Debug/
+Release/
+
+# Игнорировать временные файлы и файлы редакторов
+*.swp
+*.swo
+*.tmp
+.vscode/
+.idea/
+
+# Игнорировать файлы логов
+*.log
+
+# Игнорировать файлы настроек компилятора
+*.ilk
+*.pdb
+*.idb
+
+# Игнорировать файлы данных, генерируемые программой
+users.csv
+transactions.csv
