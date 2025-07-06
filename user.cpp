@@ -6,6 +6,23 @@
 
 using namespace std;
 
+// Проверка корректности логина и пароля (не пустые, без запятых)
+bool isValidInput(const string& input) 
+{
+    if (input.empty()) 
+    {
+        cout << "Ошибка: Ввод не может быть пустым.\n";
+        return false;
+    }
+    if (input.find(",") != string::npos) 
+    {
+        cout << "Ошибка: Логин и пароль не могут содержать запятые.\n";
+        return false;
+    }
+    return true;
+}
+
+
 bool userExists(const string& login) 
 {
     ifstream file("users.csv");
@@ -30,9 +47,14 @@ bool userExists(const string& login)
 
 bool registerUser(const string& login, const string& password) 
 {
+    if (!isValidInput(login) || !isValidInput(password)) 
+    {
+        return false;
+    }
+
     if (userExists(login)) 
     {
-        cout << "Ошибка: Логин уже занят.\n";
+        cout << "Ошибка: Логин уже занят. Попробуйте другой.\n";
         return false;
     }
 
@@ -45,12 +67,19 @@ bool registerUser(const string& login, const string& password)
 
     file << login << "," << password << "\n";
     file.close();
-    cout << "Регистрация успешна!\n";
+    cout << "Регистрация успешна! Теперь вы можете войти.\n";
     return true;
 }
 
-bool loginUser(const string& login, const string& password) 
+User loginUser(const string& login, const string& password) 
 {
+    User emptyUser; 
+
+    if (!isValidInput(login) || !isValidInput(password)) 
+    {
+        return emptyUser;
+    }
+
     ifstream file("users.csv");
     string line;
 
@@ -64,12 +93,12 @@ bool loginUser(const string& login, const string& password)
             if (existingLogin == login && existingPassword == password) 
             {
                 file.close();
-                cout << "Вход успешен!\n";
-                return true;
+                cout << "Вход успешен! Добро пожаловать, " << login << "!\n";
+                return User{ login, password };
             }
         }
     }
     file.close();
-    cout << "Ошибка: Неверный логин или пароль.\n";
-    return false;
+    cout << "Ошибка: Неверный логин или пароль. Попробуйте снова.\n";
+    return emptyUser;
 }
