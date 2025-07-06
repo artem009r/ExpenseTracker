@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "user.h"
 
 using namespace std;
 
@@ -25,12 +26,26 @@ int main()
 
         switch (choice) 
         {
-        case 1:
-            cout << "Функция входа (будет реализована).\n";
+        case 1: {
+            // Вход
+            string login, password;
+            cout << "Введите логин: ";
+            getline(cin, login);
+            cout << "Введите пароль: ";
+            getline(cin, password);
+            loginUser(login, password);
             break;
-        case 2:
-            cout << "Функция регистрации (будет реализована).\n";
+        }
+        case 2: {
+            // Регистрация
+            string login, password;
+            cout << "Введите логин: ";
+            getline(cin, login);
+            cout << "Введите пароль: ";
+            getline(cin, password);
+            registerUser(login, password);
             break;
+        }
         case 3:
             cout << "До свидания!\n";
             isRunning = false;
